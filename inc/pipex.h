@@ -8,6 +8,11 @@
 #include <sys/wait.h>
 #include <string.h>
 
+# include <sys/wait.h>
+# include <fcntl.h>
+# include "../lib/libft/libft.h"
+# include "../lib/ft_printf/ft_printf.h"
+
 // Define the structure to hold program data
 typedef struct s_pipex {
     char    **cmd1;       // Parsed command 1 (e.g., ["ls", "-l", NULL])
