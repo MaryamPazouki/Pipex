@@ -23,9 +23,9 @@ typedef struct s_pipex {
 int main(int argc, char **argv);
 void ft_init_pipex(t_pipex *data, char **argv);
 void ft_check_args(int argc);
-//char **ft_parse_cmds(char *cmd);
-//t_pipex *ft_parse_args(char **argv);
-//void ft_exec(t_pipex *data, char **cmd, int is_last);
-void ft_cleanup(t_pipex *data, int *pipefd);
+char **ft_parse_cmds(char *cmd);
+t_pipex *ft_parse_args(char **argv);
+void ft_exec(t_pipex *data, char **cmd, int is_last);
+void ft_cleanup(t_pipex *data);
 
 #endif

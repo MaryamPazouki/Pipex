@@ -15,6 +15,9 @@ SRC =	$(SRC_DIR)pipex.c \
 		$(SRC_DIR)ft_init_pipex.c\
 		$(SRC_DIR)ft_check_args.c\
 		$(SRC_DIR)ft_cleanup.c \
+		$(SRC_DIR)ft_exec.c \
+		$(SRC_DIR)ft_parse_args.c \
+		$(SRC_DIR)ft_parse_cmds.c \
 
 # Object Files
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
