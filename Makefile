@@ -11,7 +11,7 @@ OBJ_DIR = obj/
 INCLUDES = -I inc/
 
 # Source Files
-SRC =	$(SRC_DIR)main.c \
+SRC =	$(SRC_DIR)pipex.c \
 		$(SRC_DIR)ft_init_pipex.c\
 		$(SRC_DIR)ft_check_args.c\
 		$(SRC_DIR)ft_cleanup.c \
