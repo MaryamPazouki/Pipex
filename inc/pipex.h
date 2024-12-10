@@ -1,31 +1,30 @@
 #ifndef PIPEX_H
-# define PIPEX_H
+#define PIPEX_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "../lib/libft/libft.h"
-# include "../lib/ft_printf/includes/ft_printf.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <string.h>
 
+// Define the structure to hold program data
+typedef struct s_pipex {
+    char    **cmd1;       // Parsed command 1 (e.g., ["ls", "-l", NULL])
+    char    **cmd2;       // Parsed command 2 (e.g., ["wc", "-l", NULL])
+    char    *infile;      // Input file name
+    char    *outfile;     // Output file name
+    int     infile_fd;    // File descriptor for infile
+    int     outfile_fd;   // File descriptor for outfile
+    int     pipefd[2];    // Pipe file descriptors (pipefd[0] = read, pipefd[1] = write)
+}   t_pipex;
 
-typedef enum e_bool
-{
-	false,
-	true
-} t_bool;
-
-typedef struct s_pipex
-{
-	int     in_fd;
-	int     out_fd;
-	t_bool	here_doc; // use `int` if you prefer
-	t_bool	is_invalid_infile;
-	char	**cmd_paths;
-	char	***cmd_args;
-	int		cmd_count;
-} t_pipex;
-
+// Function prototypes
+void ft_init_pipex(t_pipex *data, char **argv);
+void ft_check_args(int argc);
+char **ft_parse_cmds(char *cmd);
+t_pipex *ft_parse_args(char **argv);
+void ft_exec(t_pipex *data, char **cmd, int is_last);
+void ft_cleanup(t_pipex *data, int *pipefd);
 
 #endif
