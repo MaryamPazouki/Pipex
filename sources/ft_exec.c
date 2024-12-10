@@ -36,3 +36,23 @@ void ft_exec(t_pipex *data, char **cmd, int is_last) {
         exit(EXIT_FAILURE);
     }
 }
+
+
+void ft_exec(t_pipex *data, char **cmd, int is_last) {
+    char *cmd_path;
+
+    // 1. Get the full path of the command
+    cmd_path = get_command_path(cmd[0], environ);
+    if (!cmd_path) {
+        ft_printf("Command not found: %s\n", cmd[0]);
+        exit(127); // Exit with "command not found" status
+    }
+
+    // 2. Use cmd_path in execve
+    execve(cmd_path, cmd, environ);
+
+    // 3. Handle execve failure
+    perror("execve failed");
+    free(cmd_path);
+    exit(EXIT_FAILURE);
+}
