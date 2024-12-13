@@ -1,5 +1,32 @@
 #include "pipex.h"
 
+
+void	child_process(char **argv, char **envp, int *fd)
+{
+	int	file_in;
+
+	file_in = open(argv[1], O_RDONLY, 0777);
+	if (file_in == -1)
+		ft_error();
+	dup2(fd[1], STDOUT_FILENO);
+	dup2(file_in, STDIN_FILENO);
+	close(fd[0]);
+	ft_execute(argv[2], envp);
+}
+
+void	parent_process(char **argv, char **envp, int *fd)
+{
+	int	file_out;
+
+	file_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file_out == -1)
+		ft_error();
+	dup2(fd[0], STDIN_FILENO);
+	dup2(file_out, STDOUT_FILENO);
+	close(fd[1]);
+	ft_execute(argv[3], envp);
+}
+
 void ft_exec(t_pipex *data, char **cmd, int is_last) {
     pid_t pid;
 
@@ -11,15 +38,9 @@ void ft_exec(t_pipex *data, char **cmd, int is_last) {
     }
 
     if (pid == 0) { // Child process
-        if (is_last) {
-            // Redirect pipe input to stdin and output to the outfile
-            dup2(data->pipefd[0], STDIN_FILENO);
-            dup2(data->outfile_fd, STDOUT_FILENO);
-        } else {
-            // Redirect input from infile and output to the pipe
-            dup2(data->infile_fd, STDIN_FILENO);
-            dup2(data->pipefd[1], STDOUT_FILENO);
-        }
+        
+    }
+     
 
         // Close unused pipe ends
         close(data->pipefd[0]);
