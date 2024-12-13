@@ -41,10 +41,14 @@ void	child_process(t_pipex *data, char **envp)
 		ft_error();
 	dup2(data->pipefd[1], STDOUT_FILENO);
 	dup2(file_in, STDIN_FILENO);
-	close(data->pipefd[0]);
+	close(file_in);
+    close(data->pipefd[0]);
+    close(data->pipefd[1]);
 	cmd1_path = ft_find_path(data->cmd1, envp);
-	if (execve(cmd1_path, data->cmd1, envp) == -1)
-		ft_error();
+	if (!cmd1_path || execve(cmd1_path, data->cmd1, envp) == -1) {
+        perror("Error executing command 1");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void	parent_process(t_pipex *data, char **envp)
@@ -57,9 +61,13 @@ void	parent_process(t_pipex *data, char **envp)
 		ft_error();
 	dup2(data->pipefd[0], STDIN_FILENO);
 	dup2(file_out, STDOUT_FILENO);
-	close(data->pipefd[1]);
+	close(file_out);
+    close(data->pipefd[0]);
+    close(data->pipefd[1]);
 	cmd2_path = ft_find_path(data->cmd2, envp);
-	if (execve(cmd2_path, data->cmd2, envp) == -1)
-		ft_error();
+	if (!cmd2_path || execve(cmd2_path, data->cmd2, envp) == -1) {
+        perror("Error executing command 2");
+        exit(EXIT_FAILURE);
+	}
 }
 
