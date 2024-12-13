@@ -26,7 +26,8 @@ SRC =	pipex.c \
 		ft_cleanup.c \
 		ft_exec.c \
 		ft_parse_args.c \
-		ft_parse_cmds.c
+		ft_parse_cmds.c \
+		ft_check_path.c
 
 # Add paths to source files
 SRCS = $(addprefix $(SRC_DIR), $(SRC))

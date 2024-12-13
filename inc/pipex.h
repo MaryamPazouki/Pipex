@@ -37,12 +37,17 @@ typedef struct s_pipex {
 }   t_pipex;
 
 // Function prototypes
-int main(int argc, char **argv);
 void ft_init_pipex(t_pipex *data, char **argv);
 void ft_check_args(int argc);
 char **ft_parse_cmds(char *cmd);
 t_pipex *ft_parse_args(char **argv);
-void ft_exec(t_pipex *data, char **cmd, int is_last);
+char	*ft_find_path(char **cmd, char **envp);
+void ft_execute(t_pipex *data, char **envp);
 void ft_cleanup(t_pipex *data);
+void	child_process(t_pipex *data, char **envp);
+void	parent_process(t_pipex *data, char **envp);
+void	ft_error(void);
+size_t  safe_strlen(const char *s);
+char *ft_strjoin_double_ptr(const char *s1, char **s2);
 
 #endif

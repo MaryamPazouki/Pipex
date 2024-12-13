@@ -18,3 +18,10 @@ void ft_cleanup(t_pipex *data)
 	close(data->pipefd[0]);
 	close(data->pipefd[1]);
 }
+
+
+void	ft_error(void)
+{
+	perror("\033[31mError");
+	exit(EXIT_FAILURE);
+}
