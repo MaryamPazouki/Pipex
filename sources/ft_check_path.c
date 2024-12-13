@@ -1,3 +1,8 @@
+
+
+
+#include "pipex.h"
+
 char	*ft_find_path(char *cmd, char **envp)
 {
 	char	**poss_paths;

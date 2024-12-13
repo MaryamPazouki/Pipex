@@ -16,10 +16,7 @@ int main(int argc, char **argv) {
     ft_exec(data, data->cmd1, 0); // Execute the first command
     ft_exec(data, data->cmd2, 1); // Execute the second command (last)
 
-    // Step 5: Wait for the children to finish
-   // waitpid(pid1, &status, 0); // Wait for the first child
-    //waitpid(pid2, &status, 0); // Wait for the second child
-
+   
     // Step 7: Cleanup
     ft_cleanup(data);
 
