@@ -22,7 +22,7 @@ int main(int argc, char **argv, char **envp) {
     data = ft_parse_args(argv);
 
     // Step 3: Initialize pipex
-    //ft_init_pipex(data, argv);
+    ft_init_pipex(data, argv);
 
     // Step 4: Execute commands
     ft_execute(data, envp); // Execute the first command
