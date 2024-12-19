@@ -12,25 +12,15 @@
 
 #include "pipex.h"
 
-int main(int argc, char **argv, char **envp) {
-    t_pipex *data;
+int	main(int argc, char **argv, char **envp)
+{
+	t_pipex	*data;
 
-    // Step 1: Check arguments
-    ft_check_args(argc);
-
-    // Step 2: Parse arguments
-    data = ft_parse_args(argv);
-
-    // Step 3: Initialize pipex
-    ft_init_pipex(data, argv);
-
-    // Step 4: Execute commands
-    ft_execute(data, envp); // Execute the first command
-    ft_execute(data, envp); // Execute the second command (last)
-
-   
-    // Step 7: Cleanup
-    ft_cleanup(data);
-
-    return 0;
+	ft_check_args(argc);
+	data = ft_parse_args(argv);
+	ft_init_pipex(data, argv);
+	ft_execute(data, envp);
+	ft_execute(data, envp);
+	ft_cleanup(data);
+	return (0);
 }
